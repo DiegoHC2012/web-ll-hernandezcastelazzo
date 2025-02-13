@@ -14,6 +14,7 @@
             {% for Usuario in Usuarios %}
             <div class="user_container">
                 <img class="user_photo" src="{{Usuario.photo}}">
+                <p class="user_name">{{Usuario.name}}</p>
                 <br>
                 <p class="user_data">Id: {{Usuario.id}} Edad: {{Usuario.age}}</p>
             </div>
