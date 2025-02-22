@@ -8,17 +8,31 @@
         <link rel="stylesheet" href="{% static 'css/users.css' %}">
     </head>
     <body>
+        {% include 'base/header.html' %}
         <h1>{{titulo}}</h1>
         <br>
         <div class="container">
             {% for Usuario in Usuarios %}
-            <div class="user_container">
+            {% include 'components/UserCard.html' with name=Usuario.name photo=Usuario.photo email=Usuario.email id=Usuario.id%}
+            <!-- <div class="user_container">
                 <img class="user_photo" src="{{Usuario.photo}}">
                 <p class="user_name">{{Usuario.name}}</p>
                 <br>
                 <p class="user_data">Id: {{Usuario.id}} Edad: {{Usuario.age}}</p>
-            </div>
+            </div> -->
             {% endfor %}
+            <div class="user_card_container">
+                <div>
+                    <img class="user_photo" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.webp" alt="Foto de perfil default">
+                </div>
+                <div>
+                    
+                </div>
+                <div>
+                    <a href="/users/create" id="default_card">Añadir uno nuevo</a>
+                </div>
+            </div>
         </div>
+        {% include 'base/footer.html' %}
     </body>
 </html>
