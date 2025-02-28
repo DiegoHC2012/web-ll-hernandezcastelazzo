@@ -1,31 +1,56 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<main class="content">
-    <h1>Práctica 5</h1>
-    <section class="instructions">
-        <p><strong>Materia</strong>: Desarrollo Web 2</p>
-        <p><strong>Docente</strong>: Luis Angel Mejía Poot</p>
-        <p><strong>Alumno</strong>: Hernandez Castelazzo Diego Rodrigo</p>
-        <br>
-        <h2>Instrucciones:</h2>
-        <ol>
-            <li>Crear página <strong>index</strong> de su proyecto en Django al ir a la URL <code>127.0.0.1:8000</code> y mostrar la página principal.</li>
-            <li>Desde la lista de usuarios, al presionar el botón <strong>“Ver”</strong> deberá redirigir a la página donde se encuentra el formulario para editar la información del usuario.</li>
-            <li>Crear la pantalla donde se podrá ver el formulario de actualización de usuario:
-                <ul>
-                    <li>Maquetar formulario con todos los campos editables.</li>
-                    <li>Mostrar los datos correspondientes del usuario en cada campo del formulario.</li>
-                    <li>Debajo del formulario, mostrar en una <strong>tabla</strong> todas las direcciones del usuario seleccionado.</li>
-                </ul>
-            </li>
-            <li>Crear el método <strong>POST</strong> para que, al presionar el botón “Actualizar”, se realice la actualización de la información del usuario.</li>
-            <li>Diseñar el <strong>Header y Footer</strong> creados en la última clase.</li>
-            <li>En el Header, agregar las secciones <strong>Orders</strong> y <strong>Users</strong> para navegar a sus respectivos listados.</li>
-            <li>Cada pantalla debe tener su propio archivo <code>CSS</code> y <code>JS</code> (este último será utilizado en clases futuras).</li>
-            <li>El diseño de las pantallas queda a la creatividad del alumno.</li>
-        </ol>
-        
-        </section>
-</main>
+ <div class="grid-container">
+    <div class="grid-item">
+        <img src="{{ imagen1.imagen_url }}" alt="Imagen 1">
+    </div>
+    <div class="grid-item">
+        <img src="{{ imagen2.imagen_url }}" alt="Imagen 2">
+    </div>
+</div>
+
+<div class="grid-container">
+    <div class="left-column">
+        <div class="grid-item">
+            <img src="{{ imagen3.imagen_url }}" alt="Imagen 3">
+        </div>
+        <div class="grid-item">
+            <img src="{{ imagen4.imagen_url }}" alt="Imagen 4">
+        </div>
+    </div>
+    <div class="grid-item">
+        <img src="{{ imagen5.imagen_url }}" alt="Imagen 5">
+    </div>
+</div>
+
+<h1 id="noticiasT">NOTICIAS</h1><br>
+
+<div class="noticias-container">
+    <div class="noticias-column">
+        {% for Noticia in Noticias %}
+        <div class="noticias-item-vertical">
+            <img class="noticias-imagen" src="{{ Noticia.imagen_url }}" alt="Imagen de una noticia chaval">
+            <div class="noticias-texto">
+                <h3>{{ Noticia.titulo }}</h3><br>
+                <p>{{ Noticia.descripcion }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="noticias-column-derecha">
+        {% for evento in Eventos %}
+        <div class="noticias-item-horizontal">
+            <img src="{{ evento.imagen_url }}" alt="Imagen de un evento">
+            <div class="noticias-contenido">
+                <h3>{{ evento.name }}</h3><br>
+                <p><strong>Localidad: </strong>{{ evento.localidad.name }}</p>
+                <p><strong>Descripción:</strong></p>
+                <p>{{ evento.descripcion }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

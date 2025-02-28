@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eventos</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/eventos.css' %}">
+    </head>
+    <body>
+        {% include 'base/header.html' %}
+        <div class="container_eventos">
+            {% for evento in eventos %}
+                {% include 'components/EventoCard.html' with name=evento.name descripcion=evento.descripcion imagen=evento.imagen_url localidad=evento.localidad.name %}
+            {% endfor %}
+        </div>        
+    </body>
+</html>

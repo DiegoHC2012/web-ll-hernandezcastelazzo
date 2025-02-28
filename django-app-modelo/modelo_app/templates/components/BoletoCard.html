@@ -1,0 +1,11 @@
+<div class="boleto_card_container">
+    <div class="boleto_image">
+        <img class="boleto_photo" src="{{ photo }}" alt="Foto de un boleto">
+    </div>
+    <div class="boleto_info">
+        <h3 class="boleto_tipo">{{ Tipo }}</h3>
+        <p class="boleto_localidad"><strong>Localidad:</strong> {{ localidad }}</p>
+        <p class="boleto_precio"><strong>Precio:</strong> ${{ precio|floatformat:2 }}</p>
+        <a class="btn_comprar" href="#">Comprar</a>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Boletos</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/boletos.css' %}">
+    </head>
+    <body>
+        {% include 'base/header.html' %}
+        <div class="container">
+            {% for boleto in boletos %}
+                {% include 'components/BoletoCard.html' with Tipo=boleto.tipo_boleto.tipo photo=boleto.imagen_url localidad=boleto.evento.localidad.name precio=boleto.precio %}
+            {% endfor %}
+        </div>        
+    </body>
+</html>
