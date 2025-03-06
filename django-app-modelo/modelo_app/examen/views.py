@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 import json
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 from .models import Imagenes, Noticias, Evento, Boleto, TipoBoleto, Localidad, Producto
 
 def examen(request):
@@ -101,3 +102,53 @@ def eliminar_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
     evento.delete()
     return JsonResponse({"mensaje": "Evento eliminado correctamente."})
+
+def agregarProducto(request):
+    localidades = Localidad.objects.order_by('name')
+    data = {
+        "localidades": localidades
+    }
+
+    return render(request, 'examen/AgregarProducto.html', data)
+
+def crear_producto(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        localidad = Localidad.objects.get(id=data['localidad'])
+
+        # Verificar si ya hay 10 productos hoy
+        productos_hoy = Producto.objects.filter(fecha_creacion=timezone.now().date()).count()
+        if productos_hoy >= 10:
+            return JsonResponse({"error": "No puedes agregar más de 10 productos por día."}, status=400)
+
+        # Validar precio mayor a 0
+        if float(data['precio']) <= 0:
+            return JsonResponse({"error": "El precio debe ser mayor a 0."}, status=400)
+
+        # Crear el producto
+        producto = Producto.objects.create(
+            name=data['name'],
+            precio=data['precio'],
+            localidad=localidad
+        )
+
+        return JsonResponse({"mensaje": "Producto creado con éxito", "producto_id": producto.id})
+
+    return JsonResponse({"error": "Método no permitido"}, status=400)
+
+def lista_productos(request):
+    productos = Producto.objects.order_by('-id')[:2]  # Últimos 2 productos añadidos
+    
+    return JsonResponse({"productos": [
+        {
+            "id": producto.id,
+            "name": producto.name,
+            "precio": f"${producto.precio}",
+            "localidad": producto.localidad.name
+        } for producto in productos
+    ]})
+
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return JsonResponse({"mensaje": "Producto eliminado correctamente."})

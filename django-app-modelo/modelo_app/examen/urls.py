@@ -11,4 +11,8 @@ urlpatterns = [
     path("boletosID/<int:evento_id>", views.boletoID, name="boletoID"),
     path("agregarEvento/", views.agregarEvento, name="agregarEvento"),
     path("crearEvento/", views.crearEvento, name="crearEvento"),
+    path("agregarProducto/", views.agregarProducto, name="agregarProducto"),
+    path('productosLista/', views.lista_productos, name='lista_productos'),
+    path('productosLista/crear/', views.crear_producto, name='crear_producto'),
+    path('productosLista/eliminar/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
 ]

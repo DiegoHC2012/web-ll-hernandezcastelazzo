@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Agregar Producto</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/AgregarProducto.css' %}">
+    </head>
+    <body>
+        {% include 'base/header.html' %}
+        <div class="toast-container" id="toast-container"></div>
+
+        <div class="evento-container">
+
+            <div class="producto-container">
+                <!-- Columna izquierda: Formulario -->
+                <div class="producto-form-container">
+                    <h2 class="producto-titulo">Agregar producto</h2>
+                    <form id="productoForm">
+                        {% csrf_token %}
+                        <label for="name" class="producto-label">Nombre del Producto:</label>
+                        <input type="text" id="name" class="producto-input" name="name" required>
+
+                        <label for="precio" class="producto-label">Precio:</label>
+                        <input type="number" id="precio" class="producto-input" name="precio" step="0.01" required>
+
+                        <label for="localidad" class="producto-label">Localidad:</label>
+                        <select id="localidad" class="producto-select" name="localidad" required>
+                            <option value="">Selecciona una localidad</option>
+                            {% for localidad in localidades %}
+                                <option value="{{ localidad.id }}">{{ localidad.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <div class="producto-btn-container">
+                            <button type="submit" class="producto-btn">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Columna derecha: Reglas -->
+                <div class="producto-reglas-container">
+                    <h3 class="producto-reglas-titulo">Reglas</h3>
+                    <ul class="producto-reglas-lista">
+                        <li>Ningún campo debe quedar vacío.</li>
+                        <li>El precio del producto debe ser mayor a 0.</li>
+                        <li>Mostrar mensaje de guardado o de error en caso de fallar.</li>
+                        <li>El envío de información debe ser por medio de FETCH de JS.</li>
+                        <li>El botón "Eliminar" deberá de hacerse por medio del método FETCH de JS.</li>
+                        <li>Solo se pueden agregar 10 productos por día.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tabla-container">
+                <h2>Productos recientemente agregados</h2>
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Localidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos-body">
+                        <!-- Los productos se insertarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    <script src="{% static 'js/AgregarProducto.js' %}"></script>
+</html>
