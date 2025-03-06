@@ -11,9 +11,13 @@
     <body>
         {% include 'base/header.html' %}
         <div class="container">
-            {% for boleto in boletos %}
-                {% include 'components/BoletoCard.html' with Tipo=boleto.tipo_boleto.tipo photo=boleto.imagen_url localidad=boleto.evento.localidad.name precio=boleto.precio %}
-            {% endfor %}
+            {% if boletos|length == 0 %}
+                <p>No hay boletos disponibles 😱</p>
+            {% else %}
+                {% for boleto in boletos %}
+                    {% include 'components/BoletoCard.html' with Tipo=boleto.tipo_boleto.tipo photo=boleto.imagen_url localidad=boleto.evento.localidad.name precio=boleto.precio %}
+                {% endfor %}
+            {% endif %}
         </div>        
     </body>
 </html>

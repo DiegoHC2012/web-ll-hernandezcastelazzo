@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Imagenes, Noticias, Evento, Boleto, TipoBoleto, Localidad, Producto
 
 def examen(request):
@@ -33,6 +33,13 @@ def eventos(request):
 def boletos(request):
     boletos = Boleto.objects.select_related('tipo_boleto', 'evento__localidad')
 
+    data = {
+        "boletos": boletos
+    }
+    return render(request, 'examen/Boletos.html', data)
+
+def boletoID(request, evento_id):
+    boletos = Boleto.objects.filter(evento=evento_id).select_related('tipo_boleto', 'evento__localidad')
     data = {
         "boletos": boletos
     }

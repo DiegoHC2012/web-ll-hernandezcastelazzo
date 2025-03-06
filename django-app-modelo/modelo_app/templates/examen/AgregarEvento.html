@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Agregar Evento</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/AgregarEvento.css' %}">
+    </head>
+    <body>
+        {% include 'base/header.html' %}
+        <div class="container">
+            <form method="POST" action="{% url 'createUser' %}" id="create-user-form" class="user-form-container">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" id="csrf_token">
+                <!-- {% csrf_token %} -->
+                
+                <div class="user-form-group">
+                    <label for="name" class="user-form-label">Name:</label>
+                    <input type="text" id="name" name="name" class="user-form-input" required><br>
+                </div>
+            
+                <div class="user-form-group">
+                    <label for="email" class="user-form-label">Email:</label>
+                    <input type="email" id="email" name="email" class="user-form-input" required><br>
+                </div>
+            
+                <div class="user-form-group">
+                    <label for="age" class="user-form-label">Age:</label>
+                    <input type="number" id="age" name="age" class="user-form-input" required><br>
+                </div>
+                
+                <div class="user-form-group">
+                    <label for="rfc" class="user-form-label">RFC:</label>
+                    <input type="text" id="rfc" name="rfc" class="user-form-input" required><br>
+                </div>
+            
+                <div class="user-form-group">
+                    <label for="photo" class="user-form-label">Photo URL:</label>
+                    <input type="text" id="photo" name="photo" class="user-form-input" required><br>
+                </div>
+            
+                <button id="create-user-button">Create User</button>
+
+            </form>
+        </div>        
+    </body>
+</html>
