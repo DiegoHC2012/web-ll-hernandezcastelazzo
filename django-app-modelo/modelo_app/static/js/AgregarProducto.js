@@ -1,17 +1,16 @@
-// Función para mostrar toast
+
 function showToast(message, type = "success") {
     const toastContainer = document.getElementById("toast-container");
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
     toastContainer.appendChild(toast);
-    
-    // Forzar reflow para activar la transición
+
     setTimeout(() => {
         toast.classList.add("show");
     }, 100);
 
-    // Ocultar el toast después de 3 segundos
+    //El toast se va después de 3 segundos
     setTimeout(() => {
         toast.classList.remove("show");
         setTimeout(() => {
@@ -29,7 +28,7 @@ function cargarProductos() {
         .then(response => response.json())
         .then(data => {
             let tablaBody = document.getElementById("tabla-productos-body");
-            tablaBody.innerHTML = ""; // Limpiar la tabla antes de cargar nuevos datos
+            tablaBody.innerHTML = ""; //Se limpia la tabla antes de cargar nuevos datos
 
             data.productos.forEach(producto => {
                 let fila = document.createElement("tr");
@@ -102,7 +101,7 @@ function eliminarProducto(productoId) {
     .then(response => response.json())
     .then(data => {
         showToast(data.mensaje, "success");
-        cargarProductos(); // Recargar la tabla después de eliminar
+        cargarProductos();
     })
     .catch(error => console.error("Error al eliminar producto:", error));
 }

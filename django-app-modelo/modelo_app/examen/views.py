@@ -115,17 +115,15 @@ def crear_producto(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         localidad = Localidad.objects.get(id=data['localidad'])
-
-        # Verificar si ya hay 10 productos hoy
-        productos_hoy = Producto.objects.filter(fecha_creacion=timezone.now().date()).count()
+        
+        hoy = timezone.now().date()
+        productos_hoy = Producto.objects.filter(fecha_creacion=hoy).count()
+        
         if productos_hoy >= 10:
             return JsonResponse({"error": "No puedes agregar más de 10 productos por día."}, status=400)
-
-        # Validar precio mayor a 0
         if float(data['precio']) <= 0:
             return JsonResponse({"error": "El precio debe ser mayor a 0."}, status=400)
-
-        # Crear el producto
+        
         producto = Producto.objects.create(
             name=data['name'],
             precio=data['precio'],
@@ -137,7 +135,7 @@ def crear_producto(request):
     return JsonResponse({"error": "Método no permitido"}, status=400)
 
 def lista_productos(request):
-    productos = Producto.objects.order_by('-id')[:2]  # Últimos 2 productos añadidos
+    productos = Producto.objects.order_by('-id')[:11]
     
     return JsonResponse({"productos": [
         {

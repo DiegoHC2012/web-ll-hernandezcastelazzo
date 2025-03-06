@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Modelo de Localidad
 class Localidad(models.Model):
@@ -13,7 +14,7 @@ class Producto(models.Model):
     name = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     localidad = models.ForeignKey(Localidad, on_delete=models.CASCADE)
-    fecha_creacion = models.DateField(default="2023-01-01")
+    fecha_creacion = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.name
