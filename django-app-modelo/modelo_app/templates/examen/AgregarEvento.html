@@ -10,40 +10,77 @@
     </head>
     <body>
         {% include 'base/header.html' %}
-        <div class="container">
-            <form method="POST" action="{% url 'createUser' %}" id="create-user-form" class="user-form-container">
+        <div class="toast-container" id="toast-container"></div>
 
-                <input type="hidden" name="csrf_token" value="{{ csrf_token }}" id="csrf_token">
-                <!-- {% csrf_token %} -->
-                
-                <div class="user-form-group">
-                    <label for="name" class="user-form-label">Name:</label>
-                    <input type="text" id="name" name="name" class="user-form-input" required><br>
-                </div>
-            
-                <div class="user-form-group">
-                    <label for="email" class="user-form-label">Email:</label>
-                    <input type="email" id="email" name="email" class="user-form-input" required><br>
-                </div>
-            
-                <div class="user-form-group">
-                    <label for="age" class="user-form-label">Age:</label>
-                    <input type="number" id="age" name="age" class="user-form-input" required><br>
-                </div>
-                
-                <div class="user-form-group">
-                    <label for="rfc" class="user-form-label">RFC:</label>
-                    <input type="text" id="rfc" name="rfc" class="user-form-input" required><br>
-                </div>
-            
-                <div class="user-form-group">
-                    <label for="photo" class="user-form-label">Photo URL:</label>
-                    <input type="text" id="photo" name="photo" class="user-form-input" required><br>
-                </div>
-            
-                <button id="create-user-button">Create User</button>
+        <div class="evento-container">
+            <!-- Columna izquierda: Formulario -->
+            <div class="evento-form-container">
+                <h2 class="evento-titulo">Agregar evento</h2>
+                <form id="eventoForm">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}" id="csrf_token">
 
-            </form>
-        </div>        
+                    <label for="name" class="evento-label">Nombre del Evento:</label>
+                    <input type="text" id="name" class="evento-input" name="name" required>
+        
+                    <!-- <label for="descripcion" class="evento-label">Descripción:</label> -->
+                    <!-- <textarea id="descripcion" class="evento-textarea" name="descripcion" required></textarea> -->
+        
+                    <label for="fecha_inicio" class="evento-label">Fecha de Inicio:</label>
+                    <input type="datetime-local" id="fecha_inicio" class="evento-input" name="fecha_inicio" required>
+        
+                    <label for="fecha_fin" class="evento-label">Fecha de Fin:</label>
+                    <input type="datetime-local" id="fecha_fin" class="evento-input" name="fecha_fin" required>
+        
+                    <label for="localidad" class="evento-label">Localidad:</label>
+                    <select id="localidad" class="evento-select" name="localidad" required>
+                        <option value="">Selecciona una localidad</option>
+                        {% for localidad in localidades %}
+                            <option value="{{ localidad.id }}">{{ localidad.name }}</option>
+                        {% endfor %}
+                    </select>
+        
+                    <p id="evento-mensaje" class="evento-mensaje evento-error"></p>
+                    
+                    <div class="evento-btn-container">
+                        <button type="submit" class="evento-btn">Agregar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        
+            <!-- Columna derecha: Reglas -->
+            <div class="evento-reglas-container">
+                <h3 class="evento-reglas-titulo">Reglas</h3>
+                <ul class="evento-reglas-lista">
+                    <li>Ningún campo debe quedar vacío.</li>
+                    <li>La fecha de fin no puede ser menor que la fecha de inicio.</li>
+                    <li>La fecha de inicio debe ser mayor al día de hoy.</li>
+                    <li>No puedes agregar dos eventos seguidos en la misma localidad.</li>
+                    <li>Mostrar mensaje de guardado o de error en caso de fallar.</li>
+                    <li>El envío de información debe ser por medio de FETCH de JS.</li>
+                    <li>El botón "Eliminar" deberá de hacerse por medio del metodo FETCH de JS.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="lista_eventos_container">
+            <h2>Eventos recientemente agregados</h2>
+        <table class="tabla-eventos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Localidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-body">
+                <!-- Los eventos se insertarán aquí dinámicamente -->
+            </tbody>
+        </table>
+        </div>
+
     </body>
+    <script src="{% static 'js/AgregarEvento.js' %}"></script>
 </html>

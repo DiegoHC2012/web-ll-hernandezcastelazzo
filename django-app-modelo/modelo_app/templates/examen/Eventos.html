@@ -10,7 +10,7 @@
     </head>
     <body>
         {% include 'base/header.html' %}
-        <a class="btn_crear_evento" href="/crearEvento">Agregar Evento</a><br>
+        <a class="btn_crear_evento" href="/agregarEvento">Agregar Evento</a><br>
         <div class="container_eventos">
             {% for evento in eventos %}
                 {% include 'components/EventoCard.html' with name=evento.name descripcion=evento.descripcion imagen=evento.imagen_url localidad=evento.localidad.name eventoid=evento.id %}
