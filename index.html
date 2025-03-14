@@ -8,8 +8,8 @@
         <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
         <!-- Agregar el script de Babel -->
         <script src="https://unpkg.com/@babel/standalone"></script>
-        <script type="text/babel" src="components/MyButton.js"></script>
-        <link rel="stylesheet" href="css/style.css">
+        <script type="text/babel" src="./components/MyButton.js"></script>
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
         <div id="root">
@@ -29,18 +29,31 @@
             const { useState } = React;
             const [ contador, setContador ] = useState(0);
             const [ contador2, setContador2 ] = useState(0);
-            const [ visible, setvisible ] = useState(false);
-            const [ alumnos, setAlumnos ] = useState(["juan", "pedro", "maria", "luis", "jose"]);
+            const [ visible, setVisible ] = useState(true);
             const [ alumnoCalificacion, setAlumnoCalificacion ] = useState([
-                {nombre:"juan", calificacion: 10},
-                {nombre:"pedro", calificacion: 9},
-                {nombre:"maria", calificacion: 8},
-                {nombre:"luis", calificacion: 7},
-                {nombre:"jose", calificacion: 6},
+                {nombre:"juan", calificacion: 10, materia: "Español"},
+                {nombre:"pedro", calificacion: 9, materia: "Matematicas"},
+                {nombre:"maria", calificacion: 8, materia: "Ingles"},
+                {nombre:"luis", calificacion: 7, materia: "Programacion"},
+                {nombre:"jose", calificacion: 6, materia: "Lengua Maya"},
             ]);
 
-            function verParrafo() {
-                setvisible(!visible);
+            const [visibleAlumnos, setVisibleAlumnos] = useState(
+                Array(alumnoCalificacion.length).fill(true)
+            );
+
+            function ocultarAlumno(index) {
+                const nuevosVisibles = [...visibleAlumnos];
+                nuevosVisibles[index] = false;
+                setVisibleAlumnos(nuevosVisibles);
+            }
+
+            function VerAlumnos() {
+                setVisible(!visible);
+            }
+
+            function restaurarAlumnos() {
+                setVisibleAlumnos(Array(alumnoCalificacion.length).fill(true));
             }
             return (
                 <div>
@@ -52,20 +65,24 @@
                     <MyButton titulo="Despedir" contador={contador2} setContador={setContador2}/>
                     <h2>Contador 2 {contador2}</h2>
                     
-                    <button onClick={verParrafo}>ver</button>
+                    <button onClick={VerAlumnos}>Mostrar/Ocultar Lista</button>
 
                     <div className="container">
-                        {alumnoCalificacion.filter((alumno) => alumno.calificacion > 7).map((alumno, index) => {
-                            return (
-                                <div style={{ display: visible ? 'block' : 'none' }}>
-                                    <p>Nombre: {alumno.nombre}</p>
-                                    <p>Calificacion: {alumno.calificacion}</p>
+                        {alumnoCalificacion.map((alumno, index) => (
+                            visibleAlumnos[index] && (
+                                <div key={index} className="card" style={{ display: visible ? 'block' : 'none' }}> 
+                                    <p>Este es el alumno {alumno.nombre}</p> 
+                                    <p>Calificación: {alumno.calificacion}</p>
+
+                                    <p>Materia: {alumno.materia}</p>
+
+                                    <button onClick={() => ocultarAlumno(index)}>Ocultar</button>
                                 </div>
                             )
-                        })}
+                        ))}
                     </div>
 
-                    
+                    <button id="restaurar-btn" onClick={restaurarAlumnos}>Restaurar Alumnos</button>
                 </div>
             );
         }
