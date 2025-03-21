@@ -1,18 +1,20 @@
-import '../style/products.css'
-export default function ProductListItem() {
+import { useNavigate } from "react-router-dom";
+import "../style/products.css";
+
+export default function ProductListItem({ product }) {
+    const navigate = useNavigate();
+
     return (
-        <div className="product-list-item-container">
+        <div className="product-list-item-container" onClick={() => navigate(`/products/${product.id}`)}>
             <div className="product-list-item">
                 <div>
-                    <img src="https://static.vecteezy.com/system/resources/previews/028/047/017/non_2x/3d-check-product-free-png.png" alt="Product" />
+                    <img src={product.image} alt={product.name} />
                 </div>
                 <div>
-                    <h3>Product Name</h3>
-                    <p>Product Description</p>
-                    <p>Price: $99.99</p>
-                    <button>Add to Cart</button>
+                    <h3>{product.name}</h3>
+                    <p>{product.date}</p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
