@@ -1,48 +1,76 @@
-.containerLogin {
+/* Fondo general */
+body {
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 30vh;
-    background-color: #444b58;
+    height: 100vh;
+    margin: 0;
+    margin-bottom: 1.5rem;
     color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 2rem;
-}
-
-.formLogin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.login-input {
+  }
+  
+  /* Contenedor del login */
+  .containerLogin {
+    background-color: #1e1e2f;
+    padding: 2rem 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 350px;
+    color: white;
+  }
+  
+  /* Título */
+  .containerLogin-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  #login-title {
+    font-size: 1.8rem;
+    color: #ffffff;
+  }
+  
+  /* Inputs */
+  .formLogin p {
+    margin: 0.5rem 0 0.2rem;
+    font-weight: 500;
+    color: #ccc;
+  }
+  
+  .login-input {
     width: 100%;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
     border: none;
-    margin-bottom: 10px;
-    background-color: #333;
+    border-radius: 10px;
+    background-color: #2e2e3f;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .login-input::placeholder {
+    color: #888;
+  }
+  
+  /* Botón */
+  .login-button-container {
+    text-align: center;
+  }
+  
+  .login-button {
+    background: linear-gradient(to right, #8f44fd, #6a23ff);
     color: white;
-}
-
-.login-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.login-button {
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 0.75rem 2rem;
     border: none;
-    background-color: #61dafb;
-    color: white;
+    border-radius: 12px;
+    font-size: 1rem;
     cursor: pointer;
-}
-
+    transition: background 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background: linear-gradient(to right, #a55eff, #7e39ff);
+  }
+  

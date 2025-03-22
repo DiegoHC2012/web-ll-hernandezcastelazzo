@@ -1,4 +1,6 @@
 import ProductListItem from "../components/ProductListItem";
+import { useNavigate } from "react-router-dom";
+import ValidateToken from "../utils/ValidateToken";
 
 const products = [
     { id: 1, name: "Unlocking the Power of Cloud Computing", date: "November 12, 2024", image: "https://i.scdn.co/image/ab67616d00001e02460895c0deb4e737ab631dae", description: "A guide to scalable cloud solutions." },
@@ -6,9 +8,11 @@ const products = [
 ];
 
 export default function Products() {
+    const hasTokenInLocalStorage = localStorage.getItem("token") !== null;
+    ValidateToken();
     return (
         <div>
-            <h1 style={{ textAlign: "center", color: "#252930" }}>Lista de productos</h1>
+            <h1 style={{ textAlign: "center" }}>Lista de productos</h1>
             <div className="container-products">
                 {products.map(product => (
                     <ProductListItem key={product.id} product={product} image={product.image} />
