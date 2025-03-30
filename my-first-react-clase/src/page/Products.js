@@ -1,23 +1,101 @@
 import ProductListItem from "../components/ProductListItem";
-import { useNavigate } from "react-router-dom";
 import ValidateToken from "../utils/ValidateToken";
-
-const products = [
-    { id: 1, name: "Unlocking the Power of Cloud Computing", date: "November 12, 2024", image: "https://i.scdn.co/image/ab67616d00001e02460895c0deb4e737ab631dae", description: "A guide to scalable cloud solutions." },
-    { id: 2, name: "AI and the Future of Work", date: "December 5, 2024", image: "https://images.pexels.com/photos/5488660/pexels-photo-5488660.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", description: "How AI is shaping the workforce." }
-];
+import { useEffect, useState } from "react";
 
 export default function Products() {
-    const hasTokenInLocalStorage = localStorage.getItem("token") !== null;
+    const [products, setProducts] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const data = await getProducts();
+            setProducts(data.products);
+        }
+
+        fetchProducts();
+    }, []);
+
+    const handleSearch = async () => {
+        if (searchTerm.trim() === "") {
+            const data = await getProducts();
+            setProducts(data.products);
+        } else {
+            const data = await getProductsByWord(searchTerm);
+            setProducts(data.products);
+        }
+    }
+
     ValidateToken();
+
     return (
         <div>
-            <h1 style={{ textAlign: "center" }}>Lista de productos</h1>
-            <div className="container-products">
-                {products.map(product => (
-                    <ProductListItem key={product.id} product={product} image={product.image} />
-                ))}
+            <div 
+                className="search-bar"
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    margin: "20px 0",
+                }}
+            >
+                <input 
+                    type="text" 
+                    placeholder="Buscar productos..." 
+                    value={searchTerm} 
+                    onChange={(e) => setSearchTerm(e.target.value)} 
+                    style={{
+                        padding: "10px",
+                        fontSize: "16px",
+                        borderRadius: "8px",
+                        border: "1px solid #ccc",
+                        width: "300px",
+                        outline: "none",
+                    }}
+                />
+                <button 
+                    onClick={handleSearch}
+                    style={{
+                        padding: "10px 20px",
+                        fontSize: "16px",
+                        borderRadius: "8px",
+                        border: "none",
+                        backgroundColor: "#007bff",
+                        color: "white",
+                        cursor: "pointer",
+                    }}
+                >
+                    Buscar
+                </button>
+            </div>
+
+
+            <div className="product-list-container">
+                {products && products.length > 0 ? (
+                    products.map((item) => (
+                        <ProductListItem 
+                            key={item.id}
+                            title={item.title}
+                            id={item.id}
+                            description={item.description}
+                            images={item.images}
+                        />
+                    ))
+                ) : (
+                    <p>No se encontraron productos.</p>
+                )}
             </div>
         </div>
     );
+}
+
+async function getProducts() {
+    const response = await fetch("https://dummyjson.com/products");
+    return response.json();
+}
+
+async function getProductsByWord(word) {
+    const response = await fetch(`https://dummyjson.com/products/search?q=${word}`);
+    const data = await response.json();
+    return data;
 }

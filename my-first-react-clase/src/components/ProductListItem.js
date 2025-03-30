@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import "../style/products.css";
 
-export default function ProductListItem({ product }) {
+export default function ProductListItem({title, id, description, images}) {
     const navigate = useNavigate();
-
+    const image = images?.[0] ?? ""
     return (
-        <div className="product-list-item-container" onClick={() => navigate(`/products/${product.id}`)}>
+        <div className="product-list-item-container" id="{id}" onClick={() => navigate(`/products/${id}`)}>
             <div className="product-list-item">
                 <div>
-                    <img src={product.image} alt={product.name} />
+                    <img src={image} />
                 </div>
                 <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.date}</p>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
                 </div>
             </div>
         </div>
