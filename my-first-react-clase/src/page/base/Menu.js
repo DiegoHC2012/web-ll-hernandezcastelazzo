@@ -18,6 +18,9 @@ export default function Menu() {
                         <li className='nav-item'><Link to="/login">Login</Link></li>
                         <li className='nav-item'><Link to="/products">Productos</Link></li>
                         <li className='nav-item'><Link to="/cart">Carrito</Link></li>
+                        <li className='nav-item'><Link to="/create-product">create product</Link></li>
+                        <li className='nav-item'><Link to="/usereducer-component">useReducer component</Link></li>
+                        <li className='nav-item'><Link to="/calculadora">Calculadora</Link></li>
                     </ul>
                     </nav>
                 </header>
