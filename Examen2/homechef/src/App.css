@@ -1,0 +1,42 @@
+.App {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color: white;
+}
+
+.App-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.App-content-left {
+  width: 95%;
+  height: 100%;
+  margin-left: 10%;
+}
+
+.App-content-left-titulo {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+}
+
+.App-content-right {
+  background-color: beige;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilo solo para pantallas menores a 768px */
+@media (max-width: 768px) {
+  .App-content {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+}
