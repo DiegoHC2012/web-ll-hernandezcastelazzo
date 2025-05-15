@@ -1,0 +1,34 @@
+.Platillo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-right: 10px;
+
+}
+
+.Platillo-card {
+  text-align: start;
+  padding: 10px;
+  background-color: #394151;
+  border-radius: 0.5rem;
+}
+
+.Platillo-img {
+  width: 98%;
+  border-radius: 0.5rem;
+}
+
+.Platillo-nombre {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .Platillo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  }
+
+  
+}

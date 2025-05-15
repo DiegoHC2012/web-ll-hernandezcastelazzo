@@ -25,18 +25,83 @@
 }
 
 .App-content-right {
-  background-color: beige;
+  margin-top: 1.3rem;
   width: 100%;
   height: 100%;
 }
+ 
+.Barra-busqueda-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.icono-lupa {
+  position: absolute;
+  left: 20px;
+  color: #394151;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.Boton-orden {
+  margin-left: 1rem;
+  padding: 10px 15px;
+  border: 2px solid #394151;
+  border-radius: 50px;
+  background-color: transparent;
+  color: #dcdcdc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.Boton-orden:hover {
+  background-color: #394151;
+  color: white;
+}
+
+
+.Barra-busqueda {
+  padding: 10px 15px 10px 2.5rem; /* deja espacio para la lupa */
+  border: 2px solid #394151;
+  border-radius: 50px;
+  background-color: #f5f5f500;
+  font-size: 16px;
+  color: #dcdcdc;
+  width: 30%;
+}
+
+.Boton-volver {
+  margin-bottom: 1rem;
+  padding: 8px 14px;
+  border: none;
+  background-color: #394151;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Boton-volver:hover {
+  background-color: #2e3540;
+}
+
 
 /* Estilo solo para pantallas menores a 768px */
 @media (max-width: 768px) {
   .App-content {
   display: grid;
-  grid-template-columns: 2fr 2fr;
+  grid-template-columns: 2fr;
   width: 100%;
   height: 100%;
   margin: 0;
+  }
+
+  .App-content-right {
+  margin: 1rem 2rem;
+  width: 90%;
+  height: 100%;
 }
 }

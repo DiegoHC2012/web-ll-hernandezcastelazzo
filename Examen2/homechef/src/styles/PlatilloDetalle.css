@@ -1,0 +1,78 @@
+.detalle-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #1e1e2f;
+  border-radius: 12px;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-volver {
+  background-color: #fcbf49;
+  border: none;
+  color: #1e1e2f;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.detalle-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.detalle-img img {
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.detalle-info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.detalle-body {
+  margin-top: 2rem;
+}
+
+.ingredientes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.ingrediente {
+  background-color: #2e2e40;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.instrucciones {
+  line-height: 1.7;
+  margin: 1rem 0;
+}
+
+.detalle-video {
+  margin-top: 2rem;
+}
+
+.detalle-video iframe {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.cargando {
+  text-align: center;
+  padding: 2rem;
+  color: #ccc;
+}

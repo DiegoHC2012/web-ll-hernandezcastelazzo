@@ -1,0 +1,15 @@
+.Category-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .Category-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1rem;
+    margin-right: 1.5rem;
+
+  }
+}

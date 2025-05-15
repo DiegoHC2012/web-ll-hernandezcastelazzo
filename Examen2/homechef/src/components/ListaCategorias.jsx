@@ -1,13 +1,16 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Category from './Category';
+import '../styles/ListaCategorias.css';
 
-export default function ListaCategorias() {
+export default function ListaCategorias({
+  setPlatillos,
+  setCategoriaSeleccionada,
+  categoriaSeleccionada
+}) {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
     const dataLocal = localStorage.getItem('categorias');
-
     if (dataLocal) {
       setCategorias(JSON.parse(dataLocal));
     } else {
@@ -16,19 +19,31 @@ export default function ListaCategorias() {
         .then(data => {
           setCategorias(data.categories);
           localStorage.setItem('categorias', JSON.stringify(data.categories));
-        })
-        .catch(err => console.error('Error al cargar categorías:', err));
+        });
     }
   }, []);
+
+  const cargarComidas = (nombreCategoria) => {
+    setCategoriaSeleccionada(nombreCategoria);
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${nombreCategoria}`)
+      .then(res => res.json())
+      .then(data => setPlatillos(data.meals || []));
+  };
 
   return (
     <div className="Category-list">
       {categorias.map(cat => (
-        <Category
+        <div
           key={cat.idCategory}
-          nombre={cat.strCategory}
-          urlImagen={cat.strCategoryThumb}
-        />
+          onClick={() => cargarComidas(cat.strCategory)}
+          style={{ cursor: 'pointer' }}
+        >
+          <Category
+            nombre={cat.strCategory}
+            urlImagen={cat.strCategoryThumb}
+            esSeleccionada={categoriaSeleccionada === cat.strCategory}
+          />
+        </div>
       ))}
     </div>
   );

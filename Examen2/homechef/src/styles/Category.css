@@ -9,6 +9,16 @@
     margin-bottom: 1rem;
 }
 
+.Category-container.seleccionada {
+  background-color: #ffa837;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.Category-container.seleccionada .Category-name {
+  color: rgb(0, 0, 0);
+}
+
 .Category-img-wrapper {
   width: 50px; 
   overflow: hidden; 
